@@ -24,7 +24,7 @@ def mask_account_card(card_info: str) -> str:
 def get_date(date: str) -> str:
     """Функция вывода даты"""
 
-    return f"{date[8:18]},{date[5:7]},{date[8:4]}"
+    return f"{date[8:10]},{date[5:7]},{date[0:4]}"
 
 print(get_date("2024-03-11T02:26:18.671407"))
 
