@@ -1,7 +1,5 @@
 from typing_extensions import Union
 
-card_info = input()
-
 
 def get_mask_card_number(card_info: Union[int, str]) -> str:
     """Функция, которая маскирует номер карты"""
@@ -15,5 +13,6 @@ def get_mask_account(card_info: Union[int, str]) -> str:
     return f"{card_info[0:5]}**{card_info[-4:]}"
 
 
-print(get_mask_card_number(card_info))
-print(get_mask_account(card_info))
+#print(get_mask_card_number(card_info))
+#print(get_mask_account(card_info))
+
