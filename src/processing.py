@@ -12,7 +12,7 @@ def filter_by_state(list_to_filter: list[dict[str, Any]], state: str = "EXECUTED
 
 
 def sort_by_date(list_to_sort: list[dict[str, Any]], revers: bool = True) -> list[dict[str, Any]]:
-    """Функция сортирует словари по дате"""
+    """Функция сортирует словари по убыванию согласно дате"""
 
     sorted_list = sorted(list_to_sort, key=lambda x: x["date"], reverse=revers)
     return sorted_list
