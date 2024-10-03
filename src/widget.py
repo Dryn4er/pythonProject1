@@ -2,7 +2,7 @@ from datetime import datetime
 
 from src.masks import get_mask_account, get_mask_card_number
 
-#card_info = input()
+# card_info = input()
 
 
 # noinspection PyTypeChecker
@@ -13,6 +13,7 @@ def mask_account_card(card_info: str) -> str:
         return get_mask_account(card_info)
     else:
         return get_mask_card_number(card_info)
+
 
 if __name__ == "__main__":
     print(mask_account_card("Visa Platinum 7000792289606361"))
@@ -30,10 +31,11 @@ if __name__ == "__main__":
 def get_date(date: str) -> str:
     """Функция вывода даты"""
 
-
     date_format = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
     new_date = date_format.strftime("%d.%m.%Y")
     return new_date
+
+
 #    return f"{date[8:10]},{date[5:7]},{date[0:4]}"
 
 

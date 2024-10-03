@@ -53,8 +53,9 @@ def state_filter_test(check_state: list[dict[str, Any]]) -> None:
     )
 
 
-def test_sort_by_date(date_filtered: list[dict[str, Any]], same_date: list[dict[str, Any]],
-                      incorrect_date_format: list[dict[str, Any]]) -> None:
+def test_sort_by_date(
+    date_filtered: list[dict[str, Any]], same_date: list[dict[str, Any]], incorrect_date_format: list[dict[str, Any]]
+) -> None:
     """Тест сортировки даты"""
 
     assert (

@@ -22,6 +22,8 @@ def get_mask_card_number(card_info: str) -> str:
                 continue
         if len(numbers) == 16:
             return f"{card_info[:-12]} {card_info[-12:-10]}** **** {card_info[-4:]}"
+
+
 #        else:
 #            raise Exception("Введите корректный номер карты/счета")
 
@@ -32,6 +34,5 @@ def get_mask_account(card_info: Union[int, str]) -> str:
     return f"{card_info[0:5]}**{card_info[-4:]}"
 
 
-#print(get_mask_card_number(card_info))
-#print(get_mask_account(card_info))
-
+# print(get_mask_card_number(card_info))
+# print(get_mask_account(card_info))
