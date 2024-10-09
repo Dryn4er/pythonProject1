@@ -7,9 +7,9 @@ from typing import Callable, Any
 def log(filename: Any) -> Callable:
     """Записывает результат выполнения или ошибки в лог"""
 
-    def my_decorator(func):
+    def my_decorator(func: Any) -> Any:
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             try:
                 time_1 = time()
                 result = func(*args, **kwargs)
