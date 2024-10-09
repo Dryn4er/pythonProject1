@@ -1,6 +1,0 @@
-my_function ok
-Execution time:0.0my_function ok
-Execution time:0.0my_function ok
-Execution time:0.0my_function ok
-Execution time:0.0my_function ok
-Execution time:0.0
