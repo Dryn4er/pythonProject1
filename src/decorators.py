@@ -33,7 +33,7 @@ def log(filename: Any) -> Callable:
 
 @log(filename='mylog.txt')
 def my_function(x: int, y: int) -> int:
-    """ Суммирует два значения """
+    """Суммирует два значения"""
     return x + y
 
 my_function(3, 5)
