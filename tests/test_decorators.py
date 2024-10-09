@@ -6,7 +6,7 @@ from src.decorators import log
 
 
 def test_log(capsys: Any) -> Any:
-    """Тест на работоспособность"""
+    """Тест на работоспособность функции"""
     @log(filename="")
     def my_function(x: Any, y: Any) -> Any:
         return x + y
