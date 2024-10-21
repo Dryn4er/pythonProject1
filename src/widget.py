@@ -19,6 +19,7 @@ if __name__ == "__main__":
     print(mask_account_card("Visa Platinum 7000792289606361"))
     print(mask_account_card("Счет 73654108430135874305"))
 
+
 #    if "Счет" in card_info:
 #        return f"{card_info[0:5]}**{card_info[-4:]}"
 #    else:
