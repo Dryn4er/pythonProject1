@@ -52,5 +52,3 @@ def test_get_transactions_data(mock_data: MagicMock):
     assert get_transactions_data("/Users/Admin/PycharmProjects/pythonProject1/data/operations.json") == [{}]
     mock_open.read.return_value = ""
     assert get_transactions_data("/Users/Admin/PycharmProjects/pythonProject1/data/operations.json") == []
-
-
