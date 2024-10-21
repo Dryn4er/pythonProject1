@@ -11,7 +11,7 @@ logger.addHandler(file_handler)
 
 
 def get_mask_card_number(card_info: str) -> str:
-    """Функция, которая маскирует номер карты  """
+    """Функция, которая маскирует номер карты"""
 
     logger.info(f'Получаем информацию по карте/счету')
     if card_info.isdigit() and len(card_info) == 16:
