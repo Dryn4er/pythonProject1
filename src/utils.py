@@ -33,7 +33,7 @@ def get_transactions_data(file: str) -> list[dict]:
 def get_summ(data: Any) -> Any:
     """Возвращает сумму транзакций"""
 
-    logger.info(f'Получаем информацию о транзакциях')
+    logger.info(f'Получаем информацию о выполненных транзакциях')
     data = get_transactions_data("/Users/Admin/PycharmProjects/pythonProject1/data/operations.json")
     conv_list = []
     summ = []
