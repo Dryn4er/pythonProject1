@@ -1,12 +1,8 @@
 import json
+from unittest.mock import MagicMock, patch
 
-from urllib3 import request
-
-from src.utils import get_summ, get_transactions_data
 from src.external_api import conversion_currency
-
-from unittest.mock import patch, MagicMock
-import requests
+from src.utils import get_transactions_data
 
 
 @patch("src.external_api.requests.request")

@@ -1,5 +1,6 @@
-from typing_extensions import Union
 import logging
+
+from typing_extensions import Union
 
 logger = logging.getLogger("masks")
 logger.setLevel(logging.DEBUG)
@@ -12,18 +13,18 @@ logger.addHandler(file_handler)
 def get_mask_card_number(card_info: str) -> str:
     """Функция, которая маскирует номер карты"""
 
-    logger.info(f"Получаем информацию по карте/счету")
+    logger.info("Получаем информацию по карте/счету")
     if card_info.isdigit() and len(card_info) == 16:
         logger.info(f"Ваша карта: {card_info[0:4]} {card_info[4:6]}** **** {card_info[12:16]}")
         return f"{card_info[0:4]} {card_info[4:6]}** **** {card_info[12:16]}"
     elif card_info.isdigit() and len(card_info) != 16 and len(card_info) != 20:
-        logger.error(f"Введите корректный номер карты/счета")
+        logger.error("Введите корректный номер карты/счета")
         raise Exception("Введите корректный номер карты/счета")
     elif card_info.isdigit() and len(card_info) == 20:
         logger.info(f"Ваш счет: **{card_info[-4:]}")
         return f"**{card_info[-4:]}"
     elif card_info is None:
-        logger.error(f"Введите номер карты/счета")
+        logger.error("Введите номер карты/счета")
         return "Введите номер карты/счета"
 
     if not card_info.isdigit():
