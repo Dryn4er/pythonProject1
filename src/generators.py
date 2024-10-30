@@ -50,16 +50,26 @@ transactions = [
 ]
 
 
-def filter_by_currency(transactions_list: Any, currency: str) -> Union[iter, str]:
-    """Функция принемает и фильтрует список словарей"""
+def filter_by_currency(transactions_list: Any, currency: str) -> Any:
+    """Функция принимает и фильтрует список словарей"""
 
     try:
-        for element in transactions_list:
-            if element["operationAmount"]["currency"]["code"] == currency:
-                yield element
+        if len(transactions_list) > 1:
+                for x in transactions_list:
+                    if x.get("operationAmount").get("currency").get("name") == currency:
+                        yield x
+                    else:
+                        return "Нет транзакций"
     except StopIteration:
-        if not transactions_list == []:
-            return "Нет транзакций"
+        pass
+
+#    try:
+#        for element in transactions_list:
+#            if element["operationAmount"]["currency"]["code"] == currency:
+#                yield element
+#    except StopIteration:
+#        if not transactions_list == []:
+#            return "Нет транзакций"
 
 
 def card_number_generator(start: int, stop: int) -> Iterator[str]:

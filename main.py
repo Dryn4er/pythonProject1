@@ -4,6 +4,7 @@ from src.read_csv_pandas import read_csv, read_xlsx
 from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
 from src.utils import get_transactions_data
+from src.generators import filter_by_currency, transaction_descriptions
 
 
 def main():
@@ -52,7 +53,7 @@ def main():
         print("Отсортировать по возрастанию или по убыванию?")
         user_input_up_down = input("в порядке убывания / в порядке возрастания ").lower()
         if user_input_up_down == "в порядке убывания" or user_input_up_down == "в порядке возрастания":
-            filter_transaction_date = sort_by_date(filter, user_input_up_down)
+            filter_transaction_date = sort_by_date(filter, user_input_up_down == True)
         else:
             print("Введен некорректный ответ.")
             return
@@ -65,10 +66,7 @@ def main():
     print("Выводить только рублевые транзакции? Да/Нет")
     user_input_curr = input("Введите да или нет: ").lower()
     if user_input_curr == "да":
-        rub_trans = []
-        for trans in filter_transaction_date:
-            if trans["operationAmount"]["currency"]["code"] == "RUB":
-                rub_trans.append(trans)
+        rub_trans = filter_by_currency(transactions_from_file, currency="RUB")
     elif user_input_curr == "нет":
         rub_trans = []
         for trans in filter_transaction_date:
@@ -84,7 +82,7 @@ def main():
         trans_word = []
         for trans in rub_trans:
             if sort_by_word_yes in trans["description"]:
-                trans_word.append(trans)
+                trans_word.append(transaction_descriptions)
     elif sort_by_word == "нет":
         trans_word = []
         for trans in rub_trans:
@@ -100,34 +98,34 @@ def main():
     print(f"Всего банковских операций в выборке: {len(trans_word)}\n")
 
     for trans in trans_word:
-        if trans.get("from") and trans.get("to"):
-            date = trans.get("date", "")[:19]
+        if trans.get('from') and trans.get('to'):
+            date = trans.get('date', '')[:19]
             bad_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
             correct_date = bad_date.strftime("%d.%m.%Y")
-            description = trans.get("description", "")
-            masked_card_from = get_mask_card_number(str(trans.get("from")))
-            masked_card_to = get_mask_card_number(str(trans.get("to")))
-            masked_acc_from = get_mask_account(str(trans.get("from")))
-            masked_acc_to = get_mask_account(str(trans.get("to")))
+            description = trans.get('description', '')
+            masked_card_from = get_mask_card_number(str(trans.get('from')))
+            masked_card_to = get_mask_card_number(str(trans.get('to')))
+            masked_acc_from = get_mask_account(str(trans.get('from')))
+            masked_acc_to = get_mask_account(str(trans.get('to')))
             amount = trans["operationAmount"]["amount"]
-            if "Счет" in trans.get("from", "") and "Счет" in trans.get("to", ""):
+            if "Счет" in trans.get('from', '') and "Счет" in trans.get('to', ''):
                 print(f"{correct_date} {description}")
                 print(f"Счет: {masked_acc_from} -> Счет: {masked_acc_to}")
-                if trans.get("code") == "RUB":
+                if trans.get('code') == "RUB":
                     print(f"Сумма: {amount} руб.\n")
                 else:
                     print(f'Сумма: {amount} {trans["operationAmount"]["currency"]["code"]}\n')
-            elif "Счет" in trans.get("to", ""):
+            elif "Счет" in trans.get('to', ''):
                 print(f"{correct_date} {description}")
                 print(f"Счет: {masked_acc_to}")
-                if trans.get("code") == "RUB":
+                if trans.get('code') == "RUB":
                     print(f"Сумма: {amount} руб.\n")
                 else:
                     print(f'Сумма: {amount} {trans["operationAmount"]["currency"]["code"]}\n')
             else:
                 print(f"{correct_date} {description}")
                 print(f"Транзакция: {masked_card_from} -> {masked_card_to}")
-                if trans.get("code") == "RUB":
+                if trans.get('code') == "RUB":
                     print(f"Сумма: {amount} руб.\n")
                 else:
                     print(f'Сумма: {amount} {trans["operationAmount"]["currency"]["code"]}\n')
