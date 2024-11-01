@@ -43,7 +43,7 @@ transactions = [
 def search_description(operations, search_bar):
     """Функция для поиска в списке словарей операций по заданной строке — описанию с использованием библиотеки
     re."""
-    search = [operation for operation in operations if re.findall(search_bar, operation["description"])]
+    search = [operation for operation in operations if re.findall(search_bar, operation['description'])]
     return search
 
 

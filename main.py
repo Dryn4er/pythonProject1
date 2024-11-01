@@ -1,11 +1,12 @@
 from _datetime import datetime
 
+
 from src.read_csv_pandas import read_csv, read_xlsx
 from src.masks import get_mask_account, get_mask_card_number
 from src.processing import filter_by_state, sort_by_date
 from src.utils import get_transactions_data
-from src.generators import filter_by_currency, transaction_descriptions
-
+from src.generators import filter_by_currency
+from src.pattern import search_description
 
 def main():
     """Отвечает за основную логику проекта с пользователем и связывает функциональности между собой."""
@@ -53,7 +54,8 @@ def main():
         print("Отсортировать по возрастанию или по убыванию?")
         user_input_up_down = input("в порядке убывания / в порядке возрастания ").lower()
         if user_input_up_down == "в порядке убывания" or user_input_up_down == "в порядке возрастания":
-            filter_transaction_date = sort_by_date(filter, user_input_up_down == True)
+            user_input_up_down = True if user_input_up_down == "в порядке убывания" else False
+            filter_transaction_date = sort_by_date(filter, user_input_up_down)
         else:
             print("Введен некорректный ответ.")
             return
@@ -66,7 +68,7 @@ def main():
     print("Выводить только рублевые транзакции? Да/Нет")
     user_input_curr = input("Введите да или нет: ").lower()
     if user_input_curr == "да":
-        rub_trans = filter_by_currency(transactions_from_file, currency="RUB")
+        rub_trans = filter_by_currency([transactions_from_file], currency="RUB")
     elif user_input_curr == "нет":
         rub_trans = []
         for trans in filter_transaction_date:
@@ -79,10 +81,7 @@ def main():
     sort_by_word = input("Введите да или нет: ").lower()
     if sort_by_word == "да":
         sort_by_word_yes = input("Введите слово для фильтрации: ")
-        trans_word = []
-        for trans in rub_trans:
-            if sort_by_word_yes in trans["description"]:
-                trans_word.append(transaction_descriptions)
+        trans_word = search_description(rub_trans, sort_by_word_yes)
     elif sort_by_word == "нет":
         trans_word = []
         for trans in rub_trans:
