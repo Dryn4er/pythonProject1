@@ -50,8 +50,8 @@ transactions = [
 ]
 
 
-def filter_by_currency(transactions_list: Any, currency: str) -> Union[iter, str]:
-    """Функция принемает и фильтрует список словарей"""
+def filter_by_currency(transactions_list: Any, currency: str) -> Any:
+    """Функция принимает и фильтрует список словарей"""
 
     try:
         for element in transactions_list:
